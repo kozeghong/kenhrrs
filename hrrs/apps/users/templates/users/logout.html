@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="account align-center">
-    <p>{% trans "Logged out" %}</p>
+    <p>{% trans "成功退出登录！" %}</p>
+    <p><a href="{% url 'home' %}">{% trans "首页" %}</a></p>
 </div>
 {% endblock %}

@@ -10,16 +10,19 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-logo"><a href="">Microsoft China</a></div>
+        <div class="header-logo"><a href="{% url 'home' %}">Microsoft China</a></div>
         <div class="header-user">
-            <div class="header-not-logged-in" style="display: none;">
-                <span><a href="">登录</a></span>
-                <span><a href="">注册</a></span>
-            </div>
+        {% if user.is_authenticated %}
             <div class="header-logged">
-                <span><a class="header-profile" href="">Username</a></span>
+                <span><a class="header-profile" href="{% url 'users_profile' %}">{{ user.nickname }}</a></span>
                 <span><a class="header-notice" href="">0</a></span>
             </div>
+        {% else %}
+            <div class="header-not-logged-in">
+                <span><a href="{% url 'users_login' %}">登录</a></span>
+                <span><a href="{% url 'users_register' %}">注册</a></span>
+            </div>
+        {% endif %}
         </div>
     </div>
 

@@ -3,15 +3,35 @@
 
 {% block content %}
 <div class="card">
-<h1>个人档案</h1>
-<div class="card-content">
-    <p>电子邮件： {{ user.email }}</p>
-    <p>姓名： {{ user.nickname }}</p>
-    <p>电话： {{ user.phone }}</p>
-    <p>性别： {{ user.gender }}</p>
-    <p>角色： {{ user.role }}</p>
-    <p>加入日期： {{ user.date_joined | date:'Y-m-d' }}</p>
-
-</div>
+    <h1>个人档案</h1>
+    <div class="card-content">
+        <p>电子邮件： {{ user.email }}</p>
+        <p>姓名： {{ user.nickname | default:'待补充' }}</p>
+        <p>电话： {{ user.phone | default:'待补充' }}</p>
+        <p>性别： {% if user.gender == 'M' %}男{% else %}女{% endif %}</p>
+        <p>角色： 
+        {% if user.role == 'J' %}
+            求职者
+        {% elif user.role == 'A' %}
+            管理员
+        {% elif user.role == 'H' %}
+            HR
+        {% elif user.role == 'E' %}
+            用人部门
+        {% endif %}
+        </p>
+        <p>加入日期： {{ user.date_joined | date:'Y-m-d' }}</p>
+    </div>
+    {% if user == request.user %}
+    <div class="card-control">
+        <a href="{% url 'users_profile_edit' %}" class="btn">修改档案</a>
+    </div>
+    <div class="card-control">
+        <a href="{% url 'users_password_change' %}" class="btn">修改密码</a>
+    </div>
+    <div class="card-control">
+        <a href="{% url 'users_logout' %}" class="btn btn-red">退出登录</a>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

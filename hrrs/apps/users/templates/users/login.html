@@ -13,11 +13,10 @@
                 {% include "users/partials/field.html" %}
             {% endfor %}
             <div class="button-wrapper submit">
-                <input type="submit" value="{% trans '登录' %}" />
+                <input class="btn btn-green" type="submit" value="{% trans '登录' %}" />
             </div>
             <input type="hidden" name="next" value="{{ next }}" />
-            <p><a href="{% url 'users_password_reset' %}">{% trans "忘记密码" %}</a></p>
-            <p style="text-align: center;"><a href="{% url 'users_register' %}">{% trans "注册" %}</a></p>
+            <p style="text-align: center;margin: 10px 0;"><a href="{% url 'users_password_reset' %}">{% trans "忘记密码" %}</a> | <a href="{% url 'users_register' %}">{% trans "注册新用户" %}</a></p>
         </form>
     </div>
 </div>

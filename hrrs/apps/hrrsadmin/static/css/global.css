@@ -18,6 +18,39 @@ a {
     text-decoration: none;
 }
 
+.btn {
+    font-size: 0.8rem;
+    padding: 12px 18px;
+    color: #333;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.btn.btn-red {
+    color: #fff;
+    background: #d9534f;
+    border-color: #d9534f;
+}
+
+.btn.btn-green {
+    color: #fff;
+    background: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.btn.btn-blue {
+    color: #fff;
+    background: #337ab7;
+    border-color: #337ab7;
+}
+
+.btn.btn-orange {
+    color: #fff;
+    background: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
 .header {
     position: relative;
     overflow: hidden;
@@ -33,6 +66,7 @@ a {
     float: left;
     color: #fff;
     font-weight: bold;
+    font-size: 1.1rem;
 }
 
 .header .header-user {
@@ -41,7 +75,7 @@ a {
 }
 
 .header .header-user span {
-    padding: 0 0 0 5px;
+    padding: 0 0 0 8px;
 }
 
 .footer {
@@ -105,9 +139,10 @@ a {
 }
 
 .card h2,.card h1 {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: normal;
     padding-bottom: 8px;
+    margin-bottom: 8px;
     border-bottom: 1px solid #eee;
 }
 
@@ -128,12 +163,28 @@ a {
     color: #333;
 }
 
+.card .card-content p {
+    padding: 3px 0;
+}
+
+.card .card-control {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.card .card-control a {
+    display: block;
+}
+
 .account {
     position: relative;
     overflow: hidden;
-    padding: 20px 10px;
+    padding: 10px 10px;
     width: 300px;
-    margin: 0 auto;
+    margin: 30px auto 0;
+    background: #fff;
 }
 
 .account.align-center p{
@@ -158,7 +209,7 @@ a {
 .form-wrapper .field-wrapper label {
     display: block;
     font-size: 0.8rem;
-    margin-bottom: 3px
+    margin-bottom: 8px;
 }
 
 .form-wrapper .field-wrapper input {
@@ -166,6 +217,22 @@ a {
     font-size: 0.8rem;
     padding: 5px;
     width: 270px;
+    border: 1px solid #ccc;
+}
+
+.form-wrapper .radio-wrapper {
+    padding: 8px;
+}
+
+.form-wrapper .radio-wrapper .radio-name {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+}
+
+.form-wrapper .radio-wrapper label {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
 }
 
 .form-wrapper .button-wrapper {
@@ -175,5 +242,5 @@ a {
 
 .form-wrapper .button-wrapper input {
     font-size: 0.9rem;
-    padding: 3px 18px;
+    padding: 8px 18px;
 }

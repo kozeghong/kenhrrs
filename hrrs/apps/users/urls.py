@@ -50,8 +50,8 @@ urlpatterns = [
         {'template_name': 'users/password_reset_complete.html'},
         name='users_password_reset_complete'),
 
-    url(r'^profile/$', profile_show),
-    url(r'^profile/(\d+)/$', profile_show),
-    url(r'^profile/edit/$', profile_edit),
-    url(r'^profile/edit/(\d+)/$', profile_edit),
+    url(r'^profile/$', profile_show, name='users_profile'),
+    url(r'^profile/(\d+)/$', profile_show, name='users_profile_byid'),
+    url(r'^profile/edit/$', profile_edit, name='users_profile_edit'),
+
 ]

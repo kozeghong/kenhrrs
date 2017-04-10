@@ -1,9 +1,9 @@
 #-*- coding: utf-8
-from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required  
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, resolve_url
+from django.shortcuts import redirect, resolve_url, render, get_object_or_404
 from django.template.response import TemplateResponse
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
@@ -13,6 +13,8 @@ from .compat import urlsafe_base64_decode
 from .conf import settings
 from .signals import user_activated, user_registered
 from .utils import EmailActivationTokenGenerator, send_activation_email
+
+from .models import User
 
 try:
     from django.contrib.sites.shortcuts import get_current_site
@@ -170,30 +172,28 @@ def activation_complete(request,
         context.update(extra_context)
     return TemplateResponse(request, template_name, context)
 
-def profile_edit(request, user_id=None):
-    if user_id is None:
-        user = request.user
-    else:
-        user = get_object_or_404(User, pk=user_id)
-
+@login_required
+def profile_edit(request):
     if request.method == 'POST':
+        user = get_object_or_404(User, pk=request.user.pk)
         new_nickname = request.POST.get('nickname', None)
         new_phone = request.POST.get('phone', None)
         new_gender = request.POST.get('gender', None)
 
         
         if(new_nickname is None)or(new_phone is None)or(new_gender is None):
-            return HttpResponseRedirect(
-                reverse('users:profile_edit', args=(user_id,))
+            return redirect(
+                reverse('users_profile_edit')
             )
 
         user.nickname = new_nickname
         user.phone = new_phone
         user.gender = new_gender
         user.save()
-        return HttpResponseRedirect(reverse('users:profile_show'))
-    return render(request, 'users/profile_edit.html', {'user': user})
+        return redirect(reverse('users_profile'))
+    return render(request, 'users/profile_edit.html')
 
+@login_required
 def profile_show(request, user_id=None):
     if user_id is None:
         user = request.user

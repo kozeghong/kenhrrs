@@ -2,6 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-<h1>{% trans "Sign Up Closed" %}</h1>
-<p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+<div class="card">
+    <h1>{% trans "注册已关闭" %}</h1>
+    <div class="card-content">
+        {% trans "我们很抱歉，但注册已关闭。" %}
+    </div>
+</div>
 {% endblock %}
