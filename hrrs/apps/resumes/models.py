@@ -7,7 +7,6 @@ from hrrs.apps.users.models import User
 from hrrs.apps.jobs.models import Job
 
 
-
 def save_path(instance, filename):
     return os.path.join('magazine', instance.name, filename)
 
@@ -33,5 +32,4 @@ class Resume(models.Model):
     projexp = models.TextField(default='', blank=True)
     workexp = models.TextField(default='', blank=True)
 
-    attachment = models.FileField(upload_to=save_path,
-                                validators=[validate_file_extension('pdf')])
+    attachment = models.FileField(upload_to=save_path)

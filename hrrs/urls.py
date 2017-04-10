@@ -15,8 +15,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from hrrs.apps.hrrsadmin import views as global_views
 
 urlpatterns = [
+    url(r'^$', global_views.home, name='home'),
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^accounts/', include('hrrs.apps.users.urls')),
     url(r'^news/', include('hrrs.apps.news.urls')),

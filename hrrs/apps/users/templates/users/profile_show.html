@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+<h1>个人档案</h1>
+<div class="card-content">
+    <p>电子邮件： {{ user.email }}</p>
+    <p>姓名： {{ user.nickname }}</p>
+    <p>电话： {{ user.phone }}</p>
+    <p>性别： {{ user.gender }}</p>
+    <p>角色： {{ user.role }}</p>
+    <p>加入日期： {{ user.date_joined | date:'Y-m-d' }}</p>
+
+</div>
+</div>
+{% endblock %}

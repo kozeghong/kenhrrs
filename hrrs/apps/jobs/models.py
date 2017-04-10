@@ -7,7 +7,7 @@ class Job(models.Model):
     description = models.TextField(default='', blank=True)
     opened = models.BooleanField(default=False)
 
-    createdby = models.ForeignKey(User, related_name='createdby_user')
-    modifiedby = models.ForeignKey(User, related_name='modifiedby_user')
+    createdby = models.ForeignKey(User, related_name='jobs_createdby_user')
+    modifiedby = models.ForeignKey(User, related_name='jobs_modifiedby_user')
     create_time = models.DateTimeField(auto_now_add=True)
     modify_time = models.DateTimeField(auto_now=True)

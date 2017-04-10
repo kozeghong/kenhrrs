@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'hrrs.apps.users',
     'hrrs.apps.news',
     'hrrs.apps.jobs',
-    'hrrs.apps.resumers',
+    'hrrs.apps.resumes',
     'hrrs.apps.workflows',
     'hrrs.apps.hrrsadmin',
 )

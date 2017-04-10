@@ -1,3 +1,5 @@
+#-*- coding: utf-8
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
 from django.core.urlresolvers import reverse
@@ -167,3 +169,34 @@ def activation_complete(request,
     if extra_context is not None:  # pragma: no cover
         context.update(extra_context)
     return TemplateResponse(request, template_name, context)
+
+def profile_edit(request, user_id=None):
+    if user_id is None:
+        user = request.user
+    else:
+        user = get_object_or_404(User, pk=user_id)
+
+    if request.method == 'POST':
+        new_nickname = request.POST.get('nickname', None)
+        new_phone = request.POST.get('phone', None)
+        new_gender = request.POST.get('gender', None)
+
+        
+        if(new_nickname is None)or(new_phone is None)or(new_gender is None):
+            return HttpResponseRedirect(
+                reverse('users:profile_edit', args=(user_id,))
+            )
+
+        user.nickname = new_nickname
+        user.phone = new_phone
+        user.gender = new_gender
+        user.save()
+        return HttpResponseRedirect(reverse('users:profile_show'))
+    return render(request, 'users/profile_edit.html', {'user': user})
+
+def profile_show(request, user_id=None):
+    if user_id is None:
+        user = request.user
+    else:
+        user = get_object_or_404(User, pk=user_id)
+    return render(request, 'users/profile_show.html', {'user': user})

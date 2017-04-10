@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import show
+from .views import index, show, publish, modify, createnew, board
 
 urlpatterns = [
     url(r'^$', index, name='index'),

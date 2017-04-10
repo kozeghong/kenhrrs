@@ -7,7 +7,7 @@ class Article(models.Model):
     content = models.TextField(default='', blank=True)
     published = models.BooleanField(default=False)
 
-    createdby = models.ForeignKey(User, related_name='createdby_user')
-    modifiedby = models.ForeignKey(User, related_name='modifiedby_user')
+    createdby = models.ForeignKey(User, related_name='news_createdby_user')
+    modifiedby = models.ForeignKey(User, related_name='news_modifiedby_user')
     create_time = models.DateTimeField(auto_now_add=True)
     modify_time = models.DateTimeField(auto_now=True)

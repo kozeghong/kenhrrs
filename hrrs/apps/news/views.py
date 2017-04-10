@@ -11,7 +11,7 @@ def show(request, article_id=None):
     return render(request, 'news/news-show.html', {'article': article})
 
 def index(request):
-    article_list = Article.objects.filter(publish=True).order_by('-modify_time')
+    article_list = Article.objects.filter(published=True).order_by('-modify_time')
     return render(request, 'news/news-list.html', {'article_list': article_list})
 
 def board(request):

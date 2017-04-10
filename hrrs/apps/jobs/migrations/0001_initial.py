@@ -11,13 +11,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name='Job',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=256)),
+                ('name', models.CharField(max_length=256)),
                 ('summary', models.CharField(max_length=256)),
-                ('content', models.TextField(default=b'', blank=True)),
-                ('published', models.BooleanField(default=False)),
+                ('description', models.TextField(default=b'', blank=True)),
+                ('opened', models.BooleanField(default=False)),
                 ('create_time', models.DateTimeField(auto_now_add=True)),
                 ('modify_time', models.DateTimeField(auto_now=True)),
             ],
