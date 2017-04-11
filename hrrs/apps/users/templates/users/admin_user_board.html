@@ -1,0 +1,35 @@
+{% extends 'hrrsadmin/admin-base.html' %}
+
+{% block htmltitle %}新闻动态管理{% endblock %}
+
+{% block content %}
+        <h1 class="page-header">新闻动态管理</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Email</th>
+                  <th>姓名</th>
+                  <th>性别</th>
+                  <th>角色</th>
+                  <th>加入日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for user in user_list %}
+                <tr>
+                  <td>{{ user.pk }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.nickname }}</td>
+                  <td>{{ user.gender }}</td>
+                  <td>{{ user.role }}</td>
+                  <td>{{ user.date_joined | date:"Y年n月d日" }}</td>
+                  <td><a href="{% url 'users_profile_edit_byid' user.pk %}">编辑档案</a> | <a href="{% url 'users_admin_changerole' user.pk %}">变更角色</a></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+{% endblock%}

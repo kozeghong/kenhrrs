@@ -1,0 +1,23 @@
+{% extends 'hrrsadmin/admin-base.html' %}
+
+{% block htmltitle %}编辑新闻动态{% endblock %}
+
+{% block content %}
+<h1 class="page-header">编辑招聘岗位</h1>
+<form method="post" action=".">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="name">招聘岗位</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="招聘岗位" value="{{ job.name }}">
+  </div>
+  <div class="form-group">
+    <label for="summary">概要</label>
+    <input type="text" class="form-control" id="summary" name="summary" placeholder="概要" value="{{ job.summary }}">
+  </div>
+  <div class="form-group">
+    <label for="description">工作描述</label>
+    <textarea class="form-control" id="description" name="description" rows="3">{{ job.description }}</textarea>
+  </div>
+  <button type="submit" class="btn btn-default">提交</button>
+</form>
+{% endblock%}

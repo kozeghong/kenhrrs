@@ -172,26 +172,40 @@ def activation_complete(request,
         context.update(extra_context)
     return TemplateResponse(request, template_name, context)
 
+
 @login_required
-def profile_edit(request):
-    if request.method == 'POST':
+def profile_edit(request, user_id=None):
+
+    if user_id is None:
         user = get_object_or_404(User, pk=request.user.pk)
+    elif request.user.role == 'A' or request.user.is_superuser:
+        user = get_object_or_404(User, pk=user_id)
+    else:
+        return redirect(reverse('users_profile_byid', args=(user_id,)))
+
+    if request.method == 'POST':
         new_nickname = request.POST.get('nickname', None)
         new_phone = request.POST.get('phone', None)
         new_gender = request.POST.get('gender', None)
 
         
         if(new_nickname is None)or(new_phone is None)or(new_gender is None):
-            return redirect(
-                reverse('users_profile_edit')
-            )
+            return redirect(reverse('users_profile_edit'))
+
+        if(new_nickname =="")or(new_phone =="")or(new_gender ==""):
+            return redirect(reverse('users_profile_edit'))
 
         user.nickname = new_nickname
         user.phone = new_phone
         user.gender = new_gender
         user.save()
-        return redirect(reverse('users_profile'))
-    return render(request, 'users/profile_edit.html')
+        if user_id is None:
+            return redirect(reverse('users_profile'))
+        else:
+            return redirect(reverse('users_admin_board'))
+
+    return render(request, 'users/profile_edit.html', {'user': user})
+
 
 @login_required
 def profile_show(request, user_id=None):
@@ -199,4 +213,33 @@ def profile_show(request, user_id=None):
         user = request.user
     else:
         user = get_object_or_404(User, pk=user_id)
+
     return render(request, 'users/profile_show.html', {'user': user})
+
+
+@login_required
+def admin_board(request):
+    if request.user.role != 'A' and not request.user.is_superuser:
+        return redirect(reverse('home'))
+        
+    user_list = User.objects.all().order_by('-pk')
+    return render(request, 'users/admin_user_board.html', {'user_list': user_list})
+
+
+@login_required
+def admin_changerole(request, user_id=None):
+    if request.user.role != 'A' and not request.user.is_superuser:
+        return redirect(reverse('home'))
+
+    user = get_object_or_404(User, pk=user_id)
+
+    if request.method == 'POST':
+        new_role = request.POST.get('role', None);
+        if new_role in ['J', 'A', 'H', 'E']:
+            user.role = new_role
+        else:
+            user.role = 'J'
+        user.save()
+        return redirect(reverse('users_admin_board'))
+
+    return render(request, 'users/admin_user_changerole.html', {'user': user})

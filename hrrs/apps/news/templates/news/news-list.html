@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}企业动态{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h2>企业动态</h2>
+        <div class="card-list">
+        {% for article in article_list %}
+            <a href="{% url 'news_show' article.pk %}">{{article.title}}</a>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

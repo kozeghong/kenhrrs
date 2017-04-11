@@ -72,10 +72,16 @@ a {
 .header .header-user {
     float: right;
     font-size: 0.9rem;
+    padding: 2px 0;
 }
 
 .header .header-user span {
-    padding: 0 0 0 8px;
+    display: inline-block;
+    margin: 0 0 0 8px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
 }
 
 .footer {

@@ -7,7 +7,8 @@ from django.contrib.auth.views import (login, logout, password_change,
 
 from .views import (activate, activation_complete, register,
                     registration_closed, registration_complete,
-                    profile_edit, profile_show)
+                    profile_edit, profile_show, admin_board,
+                    admin_changerole)
 
 urlpatterns = [
     url(r'^register/$', register, name='users_register'),
@@ -53,5 +54,7 @@ urlpatterns = [
     url(r'^profile/$', profile_show, name='users_profile'),
     url(r'^profile/(\d+)/$', profile_show, name='users_profile_byid'),
     url(r'^profile/edit/$', profile_edit, name='users_profile_edit'),
-
+    url(r'^profile/edit/(\d+)/$', profile_edit, name='users_profile_edit_byid'),
+    url(r'^board/$', admin_board, name='users_admin_board'),
+    url(r'^board/changerole/(\d+)/$', admin_changerole, name='users_admin_changerole'),
 ]

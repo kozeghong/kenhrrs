@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}招聘岗位{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h2>招聘岗位</h2>
+        <div class="card-list">
+        {% for job in job_list %}
+            <a href="{% url 'jobs_show' job.pk %}">{{job.name}}</a>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

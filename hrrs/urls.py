@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^accounts/', include('hrrs.apps.users.urls')),
     url(r'^news/', include('hrrs.apps.news.urls')),
+    url(r'^jobs/', include('hrrs.apps.jobs.urls')),
 ]

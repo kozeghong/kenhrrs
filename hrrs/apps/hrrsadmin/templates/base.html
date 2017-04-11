@@ -14,7 +14,7 @@
         <div class="header-user">
         {% if user.is_authenticated %}
             <div class="header-logged">
-                <span><a class="header-profile" href="{% url 'users_profile' %}">{{ user.nickname }}</a></span>
+                <span><a class="header-profile" href="{% url 'users_profile' %}">{{ request.user.nickname }}</a></span>
                 <span><a class="header-notice" href="">0</a></span>
             </div>
         {% else %}

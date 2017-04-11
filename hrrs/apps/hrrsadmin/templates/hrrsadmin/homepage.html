@@ -14,15 +14,17 @@
         <div class="card">
             <h2>企业动态</h2>
             <div class="card-list">
-                <a href="">aa</a>
-                <a href="">aaaaa</a>
+                {% for article in article_list %}
+                <a href="{% url 'news_show' article.pk %}">{{article.title}}</a>
+                {% endfor %}
             </div>
         </div>
         <div class="card">
             <h2>最新招聘</h2>
             <div class="card-list">
-                <a href="">bbbb</a>
-                <a href="">bbbb</a>
+                {% for job in job_list %}
+                <a href="{% url 'jobs_show' job.pk %}">{{job.name}}</a>
+                {% endfor %}
             </div>
         </div>
     </div>

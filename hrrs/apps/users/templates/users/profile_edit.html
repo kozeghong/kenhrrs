@@ -8,19 +8,19 @@
             {% csrf_token %}
             <div class="field-wrapper">
                 <label>电子邮件：</label>
-                <input type="text" value="{{ request.user.email }}" disabled />
+                <input type="text" value="{{ user.email }}" disabled />
             </div>
             <div class="field-wrapper">
                 <label>姓名：</label>
-                <input type="text" name="nickname" value="{{ request.user.nickname | default:'待补充' }}">
+                <input type="text" name="nickname" value="{{ user.nickname | default:'待补充' }}">
             </div>
             <div class="field-wrapper">
                 <label>电话：</label>
-                <input type="text" name="phone" value="{{ request.user.phone | default:'待补充' }}">
+                <input type="text" name="phone" value="{{ user.phone | default:'待补充' }}">
             </div>
             <div class="radio-wrapper">
                 <div class="radio-name">性别：</div>
-                {% if request.user.gender == 'M' %}
+                {% if user.gender == 'M' %}
                     <label><input name="gender" type="radio" value="M" checked /> 男</label>
                     <label><input name="gender" type="radio" value="F" /> 女</label>
                 {% else %}
