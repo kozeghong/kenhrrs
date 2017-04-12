@@ -1,0 +1,17 @@
+{% extends 'hrrsadmin/admin-base.html' %}
+
+{% block htmltitle %}后台管理{% endblock %}
+
+{% block content %}
+        <h1 class="page-header">欢迎，{{ request.user.nickname }}</h1>
+        <p>上次登录： {{request.user.last_login}}</p>
+        <p>用户角色： {{request.user.role}} {% if request.user.is_superuser %} 超级管理员 {% endif %}</p>
+{% endblock%}
+
+{% block htmlfooterjs %}
+    <script type="text/javascript">
+        $(function () {
+            $("#nav-admin-overview").addClass("active");
+        });
+    </script>
+{% endblock %}

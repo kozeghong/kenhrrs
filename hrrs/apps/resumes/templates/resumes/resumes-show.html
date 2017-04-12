@@ -1,7 +1,32 @@
 {% extends 'base.html' %}
 
-{% block title%}{% endblock %}
+{% block title%}{{ resume.owner.nickname }}的{{ resume.job.name }}简历{% endblock %}
+
+{% block htmlhead %}
+<link rel="stylesheet" type="text/css" href="/static/css/markdown.css" />
+{% endblock %}
 
 {% block content %}
-{{ resume }}
+<div class="card">
+    <h1>{{ resume.owner.nickname }} 的 {{ resume.job.name }} 简历</h1>
+    <div class="card-content">
+        <p>电子邮件： {{ resume.owner.email }}</p>
+        <p>姓名： {{ resume.owner.nickname | default:'待补充' }}</p>
+        <p>电话： {{ resume.owner.phone | default:'待补充' }}</p>
+        <p>性别： {% if resume.owner.gender == 'M' %} 男 {% else %} 女 {% endif %}</p>
+        <p>学历： {{ resume.degree }}</p>
+        <p>毕业年份： {{ resume.graduationyear }}</p>
+        <p>毕业院校： {{ resume.school }}</p>
+        <p>毕业院系：{{ resume.faculty }}</p>
+        <p>专业：{{ resume.subject }}</p>
+        <p>项目经历：</p>
+        <div class="markdown-body ">
+            <pre>{{ resume.projexp }}</pre>
+        </div>
+        <p>工作/实习经历：</p>
+        <div class="markdown-body ">
+            <pre>{{ resume.workexp }}</pre>
+        </div>
+    </div>
+</div>
 {% endblock %}

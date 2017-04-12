@@ -19,6 +19,7 @@ from hrrs.apps.hrrsadmin import views as global_views
 
 urlpatterns = [
     url(r'^$', global_views.home, name='home'),
+    url(r'^admin/$', global_views.admin_overview, name='admin_overview'),
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^accounts/', include('hrrs.apps.users.urls')),
     url(r'^news/', include('hrrs.apps.news.urls')),

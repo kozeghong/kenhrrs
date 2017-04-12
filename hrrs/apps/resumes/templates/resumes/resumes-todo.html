@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title%}{% endblock %}
+{% block title%}待处理的简历{% endblock %}
 
 {% block content %}
-{{ resumetodo_list }}
+    <div class="card">
+        <h2>待处理的简历</h2>
+        <div class="card-list">
+        {% for myresume in resumetodo_list %}
+            <a href="{% url 'resumes_show' myresume.pk %}">{{ myresume.job.name }}</a>
+        {% endfor %}
+        </div>
+    </div>
 {% endblock %}

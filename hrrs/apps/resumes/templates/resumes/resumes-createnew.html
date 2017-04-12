@@ -1,7 +1,70 @@
 {% extends 'base.html' %}
 
-{% block title%}{% endblock %}
+{% block title%}投递{{ job.name }}简历{% endblock %}
 
 {% block content %}
-{{ job }}
+<div class="card">
+    <h1>投递{{ job.name }}简历</h1>
+    <div class="card-content">
+        <div class="form-wrapper">
+            <form method="post" action=".">
+                {% csrf_token %}
+                <div class="field-wrapper">
+                    <label>电子邮件：</label>
+                    <input type="text" value="{{ request.user.email }}" disabled />
+                </div>
+                <div class="field-wrapper">
+                    <label>姓名：</label>
+                    <input type="text" value="{{ request.user.nickname | default:'待补充' }}" disabled />
+                </div>
+                <div class="field-wrapper">
+                    <label>电话：</label>
+                    <input type="text" value="{{ request.user.phone | default:'待补充' }}" disabled />
+                </div>
+                <div class="radio-wrapper">
+                    <div class="radio-name">性别：</div>
+                    {% if request.user.gender == 'M' %}
+                        <label><input type="radio" value="M" checked disabled /> 男</label>
+                        <label><input type="radio" value="F" disabled /> 女</label>
+                    {% else %}
+                        <label><input type="radio" value="M" disabled /> 男</label>
+                        <label><input type="radio" value="F" checked disabled /> 女</label>
+                    {% endif %}
+                </div>
+                <div class="field-wrapper">
+                    <label>学历：</label>
+                    <input type="text" name="degree" value="" />
+                </div>
+                <div class="field-wrapper">
+                    <label>毕业年份：</label>
+                    <input type="text" maxlength="4" name="graduationyear" value="" />
+                </div>
+                <div class="field-wrapper">
+                    <label>毕业院校：</label>
+                    <input type="text" name="school" value="" />
+                </div>
+                <div class="field-wrapper">
+                    <label>毕业院系：</label>
+                    <input type="text" name="faculty" value="" />
+                </div>
+                <div class="field-wrapper">
+                    <label>专业：</label>
+                    <input type="text" name="subject" value="" />
+                </div>
+                <div class="field-wrapper">
+                    <label>项目经历：</label>
+                    <textarea rows="8" name="projexp"></textarea>
+                </div>
+                <div class="field-wrapper">
+                    <label>工作/实习经历：</label>
+                    <textarea rows="8" name="workexp"></textarea>
+                </div>
+                <div class="button-wrapper submit">
+                    <input class="btn btn-green" type="submit" value="投递" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

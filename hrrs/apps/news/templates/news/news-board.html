@@ -33,3 +33,11 @@
             </table>
           </div>
 {% endblock%}
+
+{% block htmlfooterjs %}
+    <script type="text/javascript">
+        $(function () {
+            $("#nav-news-board").addClass("active");
+        });
+    </script>
+{% endblock %}
