@@ -33,3 +33,5 @@ class Resume(models.Model):
     workexp = models.TextField(default='', blank=True)
 
     attachment = models.FileField(upload_to=save_path)
+
+    date_created = models.DateTimeField(auto_now_add=True)

@@ -2,11 +2,15 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+{% block htmlhead %}
+<link rel="stylesheet" type="text/css" href="/static/css/markdown.css" />
+{% endblock %}
+
 {% block content %}
     <div class="card">
         <h1>{{ article.title }}</h1>
-        <div class="card-content">
-            {{ article.content }}
+        <div class="markdown-body card-content">
+            {{ article.content | safe }}
         </div>
     </div>
 {% endblock %}

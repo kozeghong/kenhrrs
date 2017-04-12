@@ -1,24 +1,32 @@
 #-*- coding: utf-8
 from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib.auth.decorators import login_required  
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
+
 # import json
+from markdown import markdown
+from cgi import escape
 
 from .models import Job
 
+
 def show(request, job_id=None):
     job = get_object_or_404(Job, pk=job_id, opened=True)
+    job.description = markdown(escape(job.description))
     return render(request, 'jobs/jobs-show.html', {'job': job})
+
 
 def index(request):
     job_list = Job.objects.filter(opened=True).order_by('-modify_time')
     return render(request, 'jobs/jobs-list.html', {'job_list': job_list})
 
+
 @login_required
 def board(request):
     job_list = Job.objects.all().order_by('-pk')
     return render(request, 'jobs/jobs-board.html', {'job_list': job_list})
+
 
 @login_required
 def createnew(request):
@@ -43,6 +51,7 @@ def createnew(request):
         return redirect(reverse('jobs_board'))
     return render(request, 'jobs/jobs-createnew.html')
 
+
 @login_required
 def modify(request, job_id=None):
     job = get_object_or_404(Job, pk=job_id)
@@ -64,6 +73,7 @@ def modify(request, job_id=None):
         job.save()
         return redirect(reverse('jobs_board'))
     return render(request, 'jobs/jobs-edit.html', {'job': job})
+
 
 @login_required
 def opencontrol(request, job_id=None):

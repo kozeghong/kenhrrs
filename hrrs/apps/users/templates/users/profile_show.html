@@ -22,6 +22,9 @@
         </p>
         <p>加入日期： {{ user.date_joined | date:'Y-m-d' }}</p>
     </div>
+    <div class="card-control">
+        <a href="{% url 'home' %}" class="btn">回到主页</a>
+    </div>
     {% if user == request.user %}
     <div class="card-control">
         <a href="{% url 'users_profile_edit' %}" class="btn">修改档案</a>

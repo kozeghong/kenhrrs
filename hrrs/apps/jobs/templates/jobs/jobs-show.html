@@ -2,11 +2,20 @@
 
 {% block title %}{{ job.name }}{% endblock %}
 
+{% block htmlhead %}
+<link rel="stylesheet" type="text/css" href="/static/css/markdown.css" />
+{% endblock %}
+
 {% block content %}
     <div class="card">
         <h1>{{ job.name }}</h1>
-        <div class="card-content">
-            {{ job.description }}
+        <div class="markdown-body card-content">
+            {{ job.description | safe }}
         </div>
+        {% if request.user.is_authenticated %}
+        <div class="card-control">
+            <a class="btn btn-orange" href="{% url 'resumes_createnew' job.pk %}">投个简历</a>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

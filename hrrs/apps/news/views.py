@@ -3,12 +3,16 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required  
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
+
 # import json
+from markdown import markdown
+from cgi import escape
 
 from .models import Article
 
 def show(request, article_id=None):
     article = get_object_or_404(Article, pk=article_id, published=True)
+    article.content = markdown(escape(article.content))
     return render(request, 'news/news-show.html', {'article': article})
 
 def index(request):

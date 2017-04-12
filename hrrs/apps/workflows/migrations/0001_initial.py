@@ -20,8 +20,10 @@ class Migration(migrations.Migration):
                 ('time', models.DateTimeField(auto_now_add=True)),
                 ('title', models.CharField(max_length=256)),
                 ('detail', models.TextField(default=b'', blank=True)),
+                ('from_user', models.ForeignKey(related_name='workflows_from_user', to=settings.AUTH_USER_MODEL)),
+                ('prevwf', models.ForeignKey(to='workflows.Workflow')),
                 ('resume', models.ForeignKey(to='resumes.Resume')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('to_user', models.ForeignKey(related_name='workflows_to_user', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

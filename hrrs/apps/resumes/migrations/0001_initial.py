@@ -24,6 +24,7 @@ class Migration(migrations.Migration):
                 ('projexp', models.TextField(default=b'', blank=True)),
                 ('workexp', models.TextField(default=b'', blank=True)),
                 ('attachment', models.FileField(upload_to=hrrs.apps.resumes.models.save_path)),
+                ('date_created', models.DateTimeField(auto_now_add=True)),
                 ('job', models.ForeignKey(to='jobs.Job')),
             ],
         ),

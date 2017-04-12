@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^accounts/', include('hrrs.apps.users.urls')),
     url(r'^news/', include('hrrs.apps.news.urls')),
     url(r'^jobs/', include('hrrs.apps.jobs.urls')),
+    url(r'^resumes/', include('hrrs.apps.resumes.urls')),
+    url(r'^workflows/', include('hrrs.apps.workflows.urls')),
 ]
