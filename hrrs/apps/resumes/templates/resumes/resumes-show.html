@@ -29,4 +29,29 @@
         </div>
     </div>
 </div>
+<div class="card">
+    <h1>下一状态</h1>
+    <div class="card-content">
+        <div class="form-wrapper">
+            <form method="post" action="{% url 'workflows_flow' resume.pk %}">
+                {% csrf_token %}
+                <div class="field-wrapper">
+                    <label>状态：</label>
+                    <input type="text" name="title" value="" />
+                </div>
+                <div class="field-wrapper">
+                    <label>评论：</label>
+                    <textarea rows="8" name="detail"></textarea>
+                </div>
+                <div class="field-wrapper">
+                    <label>处理人：</label>
+                    <input type="text" name="to_user_id" value="" />
+                </div>
+                <div class="button-wrapper submit">
+                    <input class="btn btn-green" type="submit" value="流转" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

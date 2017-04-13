@@ -11,4 +11,4 @@ class Workflow(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=256)
     detail = models.TextField(default='', blank=True)
-    prevwf = models.ForeignKey('self')
+    prevwf = models.ForeignKey('self', null=True, blank=True)

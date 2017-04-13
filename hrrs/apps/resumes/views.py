@@ -10,7 +10,10 @@ from hrrs.apps.jobs.models import Job
 @login_required
 def show(request, resume_id=None):
     resume = get_object_or_404(Resume, pk=resume_id)
-    return render(request, 'resumes/resumes-show.html', {'resume': resume})
+    if request.user.role in ['H', 'A', 'E'] or request.user == resume.owner:
+        return render(request, 'resumes/resumes-show.html', {'resume': resume})
+    else:
+        return redirect(reverse('resumes_my'))
 
 
 @login_required
