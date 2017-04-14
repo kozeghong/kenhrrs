@@ -1,3 +1,4 @@
+#-*- coding: utf-8
 from django import forms, template
 
 from ..fields import HoneyPotField

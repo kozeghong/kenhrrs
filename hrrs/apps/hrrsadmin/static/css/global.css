@@ -119,12 +119,7 @@ a {
 .index-body .index-entrance {
     position: relative;
     overflow: hidden;
-}
-
-.index-body .index-entrance {
-    position: relative;
-    overflow: hidden;
-    margin: 10px 0;
+    margin: 0 0 10px ;
     padding: 10px;
     background: #fff;
     text-align: center;
@@ -132,8 +127,24 @@ a {
 
 .index-body .index-entrance a {
     float: left;
+    display: block;
+    position: relative;
+    overflow: hidden;
     width: 33%;
     color: #333;
+}
+
+.index-body .index-entrance a img {
+    display: block;
+    margin: 5% 30%;
+    width: 40%;
+    height: auto;
+}
+
+.index-body .index-entrance a span {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
 }
 
 .card {
@@ -159,18 +170,127 @@ a {
 
 .card .card-list a {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     padding: 2px;
     color: #666;
 }
 
-.card .card-content {
+.card.card-news-body {
+    position: relative;
+    overflow: hidden;
+}
+
+.card.card-news-body a {
+    display: block;
+    font-size: 0.7rem;
+    padding: 2px 5px 5px;
+    color: #666;
+}
+
+.card.card-news-body a h2 {
+    display: block;
+    font-style: normal;
     font-size: 0.8rem;
+    padding: 3px 0;
+    color: #000;
+}
+
+.card.card-news-body a .card-news-summary {
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.card.card-news-body a .card-news-summary span {
+    color: #333;
+}
+
+.card.card-jobs-body {
+    position: relative;
+    overflow: hidden;
+}
+
+.card.card-jobs-body a {
+    display: block;
+    font-size: 0.7rem;
+    padding: 2px 5px 5px;
+    color: #666;
+}
+
+.card.card-jobs-body a h2 {
+    display: block;
+    font-style: normal;
+    font-size: 0.8rem;
+    padding: 3px 0;
+    color: #000;
+}
+
+.card.card-jobs-body a .card-jobs-summary {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+.card.card-jobs-body a .card-jobs-date {
+    margin-top: 8px;
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.card.card-resumes-body {
+    position: relative;
+    overflow: hidden;
+}
+
+.card.card-resumes-body a {
+    display: block;
+    font-size: 0.7rem;
+    padding: 2px 5px 5px;
+    color: #666;
+}
+
+.card.card-resumes-body a h2 {
+    display: block;
+    font-style: normal;
+    font-size: 0.8rem;
+    padding: 3px 0;
+    color: #000;
+}
+
+.card.card-resumes-body a .card-resumes-info {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+.card.card-resumes-body a .card-resumes-info p {
+    padding: 3px 0;
+}
+
+.card.card-resumes-body a .card-resumes-info .card-resumes-info-jd {
+    background: #f6f8fa;
+    padding: 7px 5px 8px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 0.55rem;
+}
+
+.card.card-resumes-body a .card-resumes-info .card-resumes-date {
+    margin-top: 8px;
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.card .card-content {
+    font-size: 0.7rem;
     color: #333;
 }
 
 .card .card-content p {
     padding: 3px 0;
+}
+
+.card .card-content p.card-content-date {
+    font-size: 0.6rem;
+    text-align: center;
+    color: #666;
 }
 
 .card .card-control {

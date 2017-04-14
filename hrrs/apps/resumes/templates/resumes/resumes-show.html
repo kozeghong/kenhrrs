@@ -4,6 +4,8 @@
 
 {% block htmlhead %}
 <link rel="stylesheet" type="text/css" href="/static/css/markdown.css" />
+<script src="/static/vuejs/vue.js"></script>
+<script src="/static/axios/axios.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -28,7 +30,25 @@
             <pre>{{ resume.workexp }}</pre>
         </div>
     </div>
+    <div class="card-control">
+            <a class="btn" href="{% url 'jobs_show' resume.job.pk %}">查看应聘岗位详情</a>
+    </div>
 </div>
+
+{% verbatim %}
+<div class="card">
+    <h1>历史</h1>
+    <div id="app-workflows-show" class="card-content">
+        <div v-for="workflow in workflows" class="workflows-item">
+            <p>状态： {{ workflow.status }}</p>
+            <p>评论： {{ workflow.comment }}</p>
+            <p>处理人： {{ workflow.to_user }}</p>
+            <p>时间： {{ workflow.time }}</p>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+
 <div class="card">
     <h1>下一状态</h1>
     <div class="card-content">
@@ -54,4 +74,41 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var app_workflows_show = new Vue({
+
+        el: '#app-workflows-show',
+
+        data: {
+            workflows: []
+        },
+
+        created: function () {
+            this.fetchData();
+        },
+
+        methods: {
+
+            fetchData: function () {
+                var that = this;
+                axios.get('{% url 'workflows_show' resume.pk %}')
+                    .then(function (response) {
+                        //console.log(response);
+                        //console.log(response.data.exists);
+                        //console.log(response.data.workflows);
+                        if(response.data.exists){
+                            for(var workflow in response.data.workflows) {
+                                that.workflows.push(response.data.workflows[workflow]);
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+
+        }
+    });
+</script>
 {% endblock %}

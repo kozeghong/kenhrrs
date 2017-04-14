@@ -1,3 +1,4 @@
+#-*- coding: utf-8
 from django.dispatch import Signal
 
 # A new user has registered.

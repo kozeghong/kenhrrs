@@ -5,10 +5,18 @@
 {% block content %}
     <div class="card">
         <h2>企业动态</h2>
-        <div class="card-list">
-        {% for article in article_list %}
-            <a href="{% url 'news_show' article.pk %}">{{article.title}}</a>
-        {% endfor %}
+        <div class="card-content">
+            为您展示我们的最新新闻动态。
         </div>
     </div>
+{% for article in article_list %}
+    <div class="card card-news-body">
+        <a href="{% url 'news_show' article.pk %}">
+            <h2>{{ article.title }}</h2>
+            <div class="card-news-summary">
+                <p><span>{{ article.create_time | date:"Y年n月d日" }}</span> - {{ article.summary }}</p>
+            </div>
+        </a>
+    </div>
+{% endfor %}
 {% endblock %}

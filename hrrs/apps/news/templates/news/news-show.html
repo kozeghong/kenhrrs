@@ -10,6 +10,8 @@
     <div class="card">
         <h1>{{ article.title }}</h1>
         <div class="markdown-body card-content">
+            <p class="card-content-date">由 {{ article.createdby.nickname }} 于 {{ article.create_time | date:"Y年n月d日" }} 发布</p>
+             <blockquote>摘要： {{ article.summary }}</blockquote>
             {{ article.content | safe }}
         </div>
     </div>

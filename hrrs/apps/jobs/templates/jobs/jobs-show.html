@@ -10,6 +10,8 @@
     <div class="card">
         <h1>{{ job.name }}</h1>
         <div class="markdown-body card-content">
+             <blockquote><strong>{{ job.summary }}</strong></blockquote>
+             <p class="card-content-date">由 {{ job.createdby.nickname }} 于 {{ job.create_time | date:"Y年n月d日" }} 发布</p>
             {{ job.description | safe }}
         </div>
         {% if request.user.is_authenticated %}

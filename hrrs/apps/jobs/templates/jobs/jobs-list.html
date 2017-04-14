@@ -5,10 +5,19 @@
 {% block content %}
     <div class="card">
         <h2>招聘岗位</h2>
-        <div class="card-list">
-        {% for job in job_list %}
-            <a href="{% url 'jobs_show' job.pk %}">{{job.name}}</a>
-        {% endfor %}
+        <div class="card-content">
+            <p>请赶紧将您的简历发送给我们吧！</p>
         </div>
     </div>
+{% for job in job_list %}
+    <div class="card card-jobs-body">
+        <a href="{% url 'jobs_show' job.pk %}">
+            <h2>{{ job.name }}</h2>
+            <div class="card-jobs-summary">
+                <p>{{ job.summary }}</p>
+                <p class="card-jobs-date">于 {{ job.create_time | date:"Y年n月d日" }} 由 {{ job.createdby.nickname }} 发布</p>
+            </div>
+        </a>
+    </div>
+{% endfor %}
 {% endblock %}

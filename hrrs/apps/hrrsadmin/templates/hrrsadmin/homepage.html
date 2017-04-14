@@ -4,13 +4,21 @@
 
     <div class="index-body">
         <div class="index-bigbanner">
-            <a href=""><img src="http://www.cnu.cc/uploads/banners/iVRC028CbxcFniguFGl3.jpg"></a>
+            <a href=""><img src="/static/img/home-banner-01.jpg"></a>
         </div>
         <div class="index-entrance">
-            <a href="">aaaa</a>
-            <a href="">bbbbb</a>
-            <a href="">cccc</a>
+            <a href="{% url 'news_index' %}"><img src="/static/icon/011-internet.png" /><span>企业动态</span></a>
+            <a href="{% url 'jobs_index' %}"><img src="/static/icon/004-signature.png" /><span>投递简历</span></a>
+            <a href="{% url 'resumes_my' %}"><img src="/static/icon/010-transport-1.png" /><span>查询进度</span></a>
         </div>
+        {% if is_manage %}
+        <div class="index-entrance">
+            <a href="{% url 'resumes_todo' %}"><img src="/static/icon/015-list.png" /><span>处理简历</span></a>
+            <a href="{% url 'jobs_board' %}"><img src="/static/icon/001-networking-1.png" /><span>招聘岗位</span></a>
+            <a href="{% url 'news_board' %}"><img src="/static/icon/005-technology.png" /><span>后台管理</span></a>
+        </div>
+        {% endif %}
+
         <div class="card">
             <h2>企业动态</h2>
             <div class="card-list">

@@ -5,10 +5,22 @@
 {% block content %}
     <div class="card">
         <h2>我投过的简历</h2>
-        <div class="card-list">
-        {% for myresume in myresume_list %}
-            <a href="{% url 'resumes_show' myresume.pk %}">{{ myresume.job.name }}</a>
-        {% endfor %}
+        <div class="card-content">
+            <p>这里可以查看我投递过的简历的情况。</p>
         </div>
     </div>
+{% for myresume in myresume_list %}
+    <div class="card card-resumes-body">
+        <a href="{% url 'resumes_show' myresume.pk %}">
+            <h2>{{ myresume.owner.nickname }} 的 {{ myresume.job.name }} 简历</h2>
+            <div class="card-resumes-info">
+                <p class="card-resumes-info-jd">岗位描述： {{ myresume.job.summary }}</p>
+                <p>{{ myresume.owner.email }} / {{ myresume.owner.phone }}</p>
+                <p>{{ myresume.degree }} - {{ myresume.graduationyear }}</p>
+                <p>{{ myresume.school }} - {{ myresume.faculty }} - {{ myresume.subject }}</p>
+                <p class="card-resumes-date">于 {{ myresume.date_created | date:"Y年n月d日 h:m:s" }} 投递</p>
+            </div>
+        </a>
+    </div>
+{% endfor %}
 {% endblock %}
