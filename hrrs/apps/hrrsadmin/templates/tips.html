@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tips_title }}{% endblock %}
+
+{% block content %}
+
+<div class="tips">
+    <h1>{{ tips_title }}</h1>
+    {% for memo in tips_memo %}
+    <p>{{ memo | safe }}</p>
+    {% endfor %}
+    <p><a href="{% url 'home' %}">返回首页</a></p>
+</div>
+
+{% endblock %}

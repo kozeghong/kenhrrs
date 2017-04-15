@@ -14,7 +14,11 @@ from .models import Job
 def show(request, job_id=None):
     job = get_object_or_404(Job, pk=job_id, opened=True)
     job.description = markdown(escape(job.description))
-    return render(request, 'jobs/jobs-show.html', {'job': job})
+    is_manage = False
+    if request.user.is_authenticated():
+        if request.user.role in ['H', 'A', 'E'] or request.user.is_superuser:
+            is_manage = True
+    return render(request, 'jobs/jobs-show.html', {'job': job, 'is_manage': is_manage})
 
 
 def index(request):
@@ -24,12 +28,18 @@ def index(request):
 
 @login_required
 def board(request):
-    job_list = Job.objects.all().order_by('-pk')
-    return render(request, 'jobs/jobs-board.html', {'job_list': job_list})
+    if request.user.role in ['H', 'A', 'E'] or request.user.is_superuser:
+        job_list = Job.objects.all().order_by('-pk')
+        return render(request, 'jobs/jobs-board.html', {'job_list': job_list})
+    return redirect(reverse('jobs_index'))
 
 
 @login_required
 def createnew(request):
+
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('jobs_index'))
+
     if request.method == 'POST':
         name = request.POST.get('name', None)
         summary = request.POST.get('summary', None)
@@ -54,6 +64,10 @@ def createnew(request):
 
 @login_required
 def modify(request, job_id=None):
+
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('jobs_index'))
+
     job = get_object_or_404(Job, pk=job_id)
     if request.method == 'POST':
         new_name = request.POST.get('name', None)
@@ -77,6 +91,8 @@ def modify(request, job_id=None):
 
 @login_required
 def opencontrol(request, job_id=None):
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('jobs_index'))
     job = get_object_or_404(Job, pk=job_id)
     job.opened = not job.opened
     # result = {'job_id': job.pk, 'opened': job.opened}

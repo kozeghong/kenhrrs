@@ -2,25 +2,104 @@
 
 {% block title%}我投过的简历{% endblock %}
 
+{% block htmlhead %}
+<script src="/static/vuejs/vue.js"></script>
+<script src="/static/axios/axios.min.js"></script>
+{% endblock %}
+
 {% block content %}
-    <div class="card">
-        <h2>我投过的简历</h2>
-        <div class="card-content">
-            <p>这里可以查看我投递过的简历的情况。</p>
-        </div>
-    </div>
-{% for myresume in myresume_list %}
-    <div class="card card-resumes-body">
-        <a href="{% url 'resumes_show' myresume.pk %}">
-            <h2>{{ myresume.owner.nickname }} 的 {{ myresume.job.name }} 简历</h2>
-            <div class="card-resumes-info">
-                <p class="card-resumes-info-jd">岗位描述： {{ myresume.job.summary }}</p>
-                <p>{{ myresume.owner.email }} / {{ myresume.owner.phone }}</p>
-                <p>{{ myresume.degree }} - {{ myresume.graduationyear }}</p>
-                <p>{{ myresume.school }} - {{ myresume.faculty }} - {{ myresume.subject }}</p>
-                <p class="card-resumes-date">于 {{ myresume.date_created | date:"Y年n月d日 h:m:s" }} 投递</p>
+    <div id="app-resumes">
+        <div class="card">
+            <h2>我投过的简历</h2>
+            <div class="card-content">
+                <p>这里可以查看我投递过的简历的情况。</p>
             </div>
-        </a>
+        </div>
+    {% for myresume in myresume_list %}
+        <div class="card card-resumes-body">
+            <a href="{% url 'resumes_show' myresume.pk %}">
+                <h2>{{ myresume.owner.nickname }} 的 {{ myresume.job.name }} 简历</h2>
+                <div class="card-resumes-info">
+                    <p class="card-resumes-info-jd">岗位描述： {{ myresume.job.summary }}</p>
+                    <p>{{ myresume.owner.email }} / {{ myresume.owner.phone }}</p>
+                    <p>{{ myresume.degree }} - {{ myresume.graduationyear }}</p>
+                    <p>{{ myresume.school }} - {{ myresume.faculty }} - {{ myresume.subject }}</p>
+                    <p class="card-resumes-date">于 {{ myresume.date_created | date:"Y年n月d日 h:m:s" }} 投递</p>
+                </div>
+                <workflows-now get-url="{% url 'workflows_now' myresume.pk %}"></workflows-now>
+            </a>
+        </div>
+    {% endfor %}
     </div>
-{% endfor %}
+<script type="text/javascript">
+
+    {% verbatim %}
+    var workflows_show_now = {
+        template: '\
+                <div v-if="exists" class="card-workflows-item">\
+                    <p><span>状态： </span>{{ status }}</p>\
+                    <p><span>处理人： </span>{{ to_user }}</p>\
+                    <p><span>时间： </span>{{ time }}</p>\
+                    <p><span>详情： </span></p>\
+                    <p>{{ comment }}</p>\
+                </div>\
+                <div v-else class="card-workflows-item"><p>暂无进度</p></div>\
+        ',
+
+        props: ['getUrl'],
+
+        data: function(){
+            data = {
+                exists: false,
+                status: "",
+                comment: "",
+                to_user: "",
+                time: "",
+            };
+            return data;
+        },
+
+        created: function () {
+            this.fetchData();
+        },
+
+        methods: {
+
+            fetchData: function () {
+                var that = this;
+                axios.get(that.getUrl)
+                    .then(function (response) {
+                        //console.log(response);
+                        //console.log(response.data.exists);
+                        //console.log(response.data.workflows);
+                        if(response.data.exists){
+                            that.exists = true;
+                            that.status = response.data.status;
+                            that.comment = response.data.comment;
+                            that.to_user = response.data.to_user;
+                            that.time = response.data.time;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+
+        }
+
+    };
+    {% endverbatim %}
+
+
+    var app_workflows_show = new Vue({
+
+        el: '#app-resumes',
+
+        components: {
+            'workflows-now': workflows_show_now
+        }
+
+    });
+
+</script>
 {% endblock %}

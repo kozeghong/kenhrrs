@@ -222,7 +222,7 @@ def admin_board(request):
     if request.user.role != 'A' and not request.user.is_superuser:
         return redirect(reverse('home'))
         
-    user_list = User.objects.all().order_by('-pk')
+    user_list = User.objects.all().order_by('pk')
     return render(request, 'users/admin_user_board.html', {'user_list': user_list})
 
 

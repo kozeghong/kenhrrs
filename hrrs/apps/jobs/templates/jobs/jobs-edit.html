@@ -1,9 +1,10 @@
 {% extends 'hrrsadmin/admin-base.html' %}
 
-{% block htmltitle %}编辑新闻动态{% endblock %}
+{% block htmltitle %}编辑招聘岗位{% endblock %}
 
 {% block content %}
 <h1 class="page-header">编辑招聘岗位</h1>
+<p><a class="btn btn-default" href="{% url 'jobs_board' %}">招聘岗位管理</a></p>
 <form method="post" action=".">
 {% csrf_token %}
   <div class="form-group">

@@ -4,6 +4,7 @@
 
 {% block content %}
 <h1 class="page-header">新增新闻动态</h1>
+<p><a class="btn btn-default" href="{% url 'news_board' %}">新闻动态管理</a></p>
 <form method="post" action=".">
 {% csrf_token %}
   <div class="form-group">

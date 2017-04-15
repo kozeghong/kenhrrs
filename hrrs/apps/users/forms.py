@@ -11,8 +11,8 @@ from .fields import HoneyPotField, PasswordField, UsersEmailField
 class UserCreationForm(forms.ModelForm):
 
     error_messages = {
-        'duplicate_email': _('A user with that email already exists.'),
-        'password_mismatch': _('The two password fields didn\'t match.'),
+        'duplicate_email': _(u'具有该电子邮件的用户已经存在。'),
+        'password_mismatch': _(u'两个密码没有匹配。'),
     }
 
     email = UsersEmailField(label=_(u'电子邮件'), max_length=255)

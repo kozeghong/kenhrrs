@@ -14,9 +14,12 @@
              <p class="card-content-date">由 {{ job.createdby.nickname }} 于 {{ job.create_time | date:"Y年n月d日" }} 发布</p>
             {{ job.description | safe }}
         </div>
-        {% if request.user.is_authenticated %}
         <div class="card-control">
             <a class="btn btn-orange" href="{% url 'resumes_createnew' job.pk %}">投个简历</a>
+        </div>
+        {% if is_manage %}
+        <div class="card-control">
+            <a class="btn" href="{% url 'resumes_todo_byjob' job.pk %}">查看该岗位收到的简历</a>
         </div>
         {% endif %}
     </div>

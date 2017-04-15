@@ -36,12 +36,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'admin_overview' %}">HRRS Dashboard</a>
+          <a class="navbar-brand" href="{% url 'admin_overview' %}">后台管理</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'admin_overview' %}">Dashboard</a></li>
-            <li><a href="{% url 'home' %}">Home</a></li>
+            <li id="nav-admin-overview"><a href="{% url 'admin_overview' %}">概览</a></li>
+            <li id="nav-news-board"><a href="{% url 'news_board' %}">新闻动态管理</a></li>
+            <li id="nav-news-createnew"><a href="{% url 'news_createnew' %}">新增新闻动态</a></li>
+            <li id="nav-jobs-board"><a href="{% url 'jobs_board' %}">招聘岗位管理</a></li>
+            <li id="nav-jobs-createnew"><a href="{% url 'jobs_createnew' %}">新增招聘岗位</a></li>
+            <li id="nav-users-admin-board"><a href="{% url 'users_admin_board' %}">用户管理</a></li>
+            <li><a href="{% url 'home' %}">返回网站首页</a></li>
           </ul>
         </div>
       </div>
@@ -49,25 +54,7 @@
 
     <div class="container-fluid">
       <div class="row">
-
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li id="nav-admin-overview"><a href="{% url 'admin_overview' %}">概览</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li id="nav-news-board"><a href="{% url 'news_board' %}">新闻动态管理</a></li>
-            <li id="nav-news-createnew"><a href="{% url 'news_createnew' %}">新增新闻动态</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li id="nav-jobs-board"><a href="{% url 'jobs_board' %}">招聘岗位管理</a></li>
-            <li id="nav-jobs-createnew"><a href="{% url 'jobs_createnew' %}">新增招聘岗位</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li id="nav-users-admin-board"><a href="{% url 'users_admin_board' %}">用户管理</a></li>
-          </ul>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-12 col-md-12 main">
         {% block content %}
 
         {% endblock %}

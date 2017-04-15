@@ -1,9 +1,9 @@
 {% extends 'hrrsadmin/admin-base.html' %}
 
-{% block htmltitle %}新闻动态管理{% endblock %}
+{% block htmltitle %}用户管理{% endblock %}
 
 {% block content %}
-        <h1 class="page-header">新闻动态管理</h1>
+        <h1 class="page-header">用户管理</h1>
         <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -24,7 +24,17 @@
                   <td>{{ user.email }}</td>
                   <td>{{ user.nickname }}</td>
                   <td>{{ user.gender }}</td>
-                  <td>{{ user.role }}</td>
+                  <td>
+                  {% if user.role == 'J' %}
+                      求职者
+                  {% elif user.role == 'A' %}
+                      管理员
+                  {% elif user.role == 'H' %}
+                      HR
+                  {% elif user.role == 'E' %}
+                      用人部门
+                  {% endif %}
+                  </td>
                   <td>{{ user.date_joined | date:"Y年n月d日" }}</td>
                   <td><a href="{% url 'users_profile_edit_byid' user.pk %}">编辑档案</a> | <a href="{% url 'users_admin_changerole' user.pk %}">变更角色</a></td>
                 </tr>

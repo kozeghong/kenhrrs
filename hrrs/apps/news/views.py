@@ -21,11 +21,16 @@ def index(request):
 
 @login_required
 def board(request):
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('news_index'))
     article_list = Article.objects.all().order_by('-pk')
     return render(request, 'news/news-board.html', {'article_list': article_list})
 
 @login_required
 def createnew(request):
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('news_index'))
+
     if request.method == 'POST':
         title = request.POST.get('title', None)
         summary = request.POST.get('summary', None)
@@ -49,6 +54,8 @@ def createnew(request):
 
 @login_required
 def modify(request, article_id=None):
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('news_index'))
     article = get_object_or_404(Article, pk=article_id)
     if request.method == 'POST':
         new_title = request.POST.get('title', None)
@@ -71,6 +78,8 @@ def modify(request, article_id=None):
 
 @login_required
 def publish(request, article_id=None):
+    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
+        return redirect(reverse('news_index'))
     article = get_object_or_404(Article, pk=article_id)
     article.published = not article.published
     # result = {'article_id': article.pk, 'published': article.published}

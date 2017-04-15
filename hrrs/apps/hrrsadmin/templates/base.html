@@ -18,7 +18,6 @@
         {% if request.user.is_authenticated %}
             <div class="header-logged">
                 <span><a class="header-profile" href="{% url 'users_profile' %}">{{ request.user.nickname }}</a></span>
-                <span><a class="header-notice" href="">0</a></span>
             </div>
         {% else %}
             <div class="header-not-logged-in">
@@ -40,7 +39,8 @@
 {% endblock %}
 
     <div class="footer">
-        版权所有 © 2017 Microsoft China 保留所有权利
+        <p>版权所有 © 2017 保留所有权利</p>
+        <p>深圳大学 许泽锋 毕业设计</p>
     </div>
 </body>
 </html>

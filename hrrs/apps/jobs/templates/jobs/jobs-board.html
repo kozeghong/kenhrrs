@@ -4,29 +4,30 @@
 
 {% block content %}
         <h1 class="page-header">招聘岗位管理</h1>
+        <p><a class="btn btn-default" href="{% url 'jobs_createnew' %}">新增招聘岗位</a></p>
         <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>岗位</th>
+                  <th>操作</th>
                   <th>创建人</th>
                   <th>创建日期</th>
                   <th>修改人</th>
                   <th>修改日期</th>
-                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
               {% for job in job_list %}
                 <tr>
                   <td>{{ job.pk }}</td>
-                  <td>{{ job.title }}</td>
+                  <td>{{ job.name }}</td>
+                  <td><a href="{% url 'jobs_modify' job.pk %}">编辑</a> - <a href="{% url 'jobs_opencontrol' job.pk %}">{% if job.opened %}下架{% else %}发布{% endif %}</a></td>
                   <td>{{ job.createdby.nickname }}</td>
                   <td>{{ job.create_time | date:"Y年n月d日" }}</td>
                   <td>{{ job.modifiedby.nickname }}</td>
                   <td>{{ job.modify_time | date:"Y年n月d日" }}</td>
-                  <td><a href="{% url 'jobs_modify' job.pk %}">编辑</a> - <a href="{% url 'jobs_opencontrol' job.pk %}">{% if job.opened %}下架{% else %}发布{% endif %}</a></td>
                 </tr>
               {% endfor %}
               </tbody>

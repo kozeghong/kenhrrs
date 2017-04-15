@@ -55,7 +55,7 @@ a {
     position: relative;
     overflow: hidden;
     background: #6cae2b;
-    padding: 0.5rem;
+    padding: 12px 10px;
 }
 
 .header a {
@@ -67,12 +67,14 @@ a {
     color: #fff;
     font-weight: bold;
     font-size: 1.1rem;
+    line-height: 100%;
 }
 
 .header .header-user {
     float: right;
-    font-size: 0.9rem;
-    padding: 2px 0;
+    margin-top: 0.09rem;
+    font-size: 0.85rem;
+    line-height: 100%;
 }
 
 .header .header-user span {
@@ -87,10 +89,14 @@ a {
 .footer {
     position: relative;
     overflow: hidden;
-    padding: 18px 0;
+    padding: 8px 0 18px;
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     color: #666;
+}
+
+.footer p {
+    padding: 5px 0;
 }
 
 .index-body {
@@ -272,10 +278,30 @@ a {
     font-size: 0.55rem;
 }
 
+.card.card-resumes-body a .card-resumes-info .card-resumes-info-jd span {
+    color: #2b579a;
+}
+
 .card.card-resumes-body a .card-resumes-info .card-resumes-date {
-    margin-top: 8px;
+    margin: 8px 0 10px;
     font-size: 0.6rem;
     color: #999;
+}
+
+.card .card-workflows-item {
+    background: #f6f8fa;
+    padding: 7px 8px 8px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 0.58rem;
+}
+
+.card .card-workflows-item p {
+    padding: 2px 0;
+}
+
+.card .card-workflows-item span {
+    color: #2b579a;
 }
 
 .card .card-content {
@@ -354,6 +380,18 @@ a {
     border: 1px solid #ccc;
 }
 
+.form-wrapper .field-wrapper select {
+    display: block;
+    text-transform: none;
+    font-size: 0.58rem;
+    line-height: 100%;
+    box-sizing: content-box;
+    padding: 5px 5px 10px;
+    width: 270px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
 .form-wrapper .radio-wrapper {
     padding: 8px;
 }
@@ -377,4 +415,43 @@ a {
 .form-wrapper .button-wrapper input {
     font-size: 0.9rem;
     padding: 8px 18px;
+}
+
+.form-wrapper p.quick-completion {
+    font-size: 0.6rem;
+    color: #2b579a;
+    padding: 6px 0;
+}
+
+.form-wrapper .quick-completion a {
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 0.6rem;
+    background: #f0f0f0;
+    color: #666;
+}
+
+.tips {
+    width: 300px;
+    padding: 20px 10px;
+    margin: 30px auto 10px;
+    background: #fff;
+}
+
+.tips h1 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.tips p {
+    text-align: center;
+    padding: 8px 5px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.tips p a {
+    text-decoration: underline;
+    color: #666;
 }
