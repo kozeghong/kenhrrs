@@ -61,8 +61,6 @@ def resumetodo(request, job_id=None):
 
 @login_required
 def createnew(request, job_id=None):
-    if request.user.role not in ['H', 'A', 'E'] and not request.user.is_superuser:
-        return redirect(reverse('news_index'))
     job = get_object_or_404(Job, pk=job_id, opened=True)
     if request.method == 'POST':
         degree = request.POST.get('degree', "")
