@@ -49,12 +49,12 @@ def resumetodo(request, job_id=None):
         if request.user.role in ['H', 'A']:
             resumetodo_list = Resume.objects.filter(job__id=job_id).order_by('-date_created')
         elif request.user.role in ['E', ]:
-            resumetodo_list = Resume.objects.filter(job__id=job_id).filter(last_workflow__to_user=request.user).order_by('-date_created')
+            resumetodo_list = Resume.objects.filter(job__id=job_id).order_by('-date_created')
     elif job_id is None:
         if request.user.role in ['H', 'A']:
             resumetodo_list = Resume.objects.all().order_by('-date_created')
         elif request.user.role in ['E', ]:
-            resumetodo_list = Resume.objects.filter(last_workflow__to_user=request.user).order_by('-date_created')
+            resumetodo_list = Resume.objects.all().order_by('-date_created')
 
     return render(request, 'resumes/resumes-todo.html', {'resumetodo_list': resumetodo_list})
 
