@@ -14,14 +14,15 @@ from hrrs.apps.users.models import User
 @login_required
 def show(request, resume_id=None):
     resume = get_object_or_404(Resume, pk=resume_id)
-    resume.projexp = markdown(escape(resume.projexp))
-    resume.workexp = markdown(escape(resume.workexp))
-    is_manage = False
-    if request.user.is_authenticated():
-        if request.user.role in ['H', 'A', 'E'] or request.user.is_superuser:
-            is_manage = True
-    to_user_list = User.objects.filter(role__in=['H', 'A', 'E']).order_by("pk")
     if request.user.role in ['H', 'A', 'E'] or request.user == resume.owner:
+        resume.projexp = markdown(escape(resume.projexp))
+        resume.workexp = markdown(escape(resume.workexp))
+        is_manage = False
+        if request.user.is_authenticated():
+            if request.user.role in ['H', 'A', 'E'] or request.user.is_superuser:
+                is_manage = True
+        to_user_list = User.objects.filter(role__in=['H', 'A', 'E']).order_by("pk")
+        
         return render(request, 'resumes/resumes-show.html', 
                         {
                             'resume': resume, 

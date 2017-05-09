@@ -48,14 +48,37 @@ def flow(request, resume_id=None):
 
 @login_required
 def show(request, resume_id=None):
-    workflow_list = Workflow.objects.filter(resume__id=resume_id).order_by('-time')
-    if workflow_list.exists():
-        result = {
-            'exists': True,
-            'workflows': []
-        }
-        for workflow in workflow_list.iterator():
-            result['workflows'].append({
+    resume = get_object_or_404(Resume, pk=resume_id)
+    if request.user.role in ['H', 'A', 'E'] or request.user == resume.owner:
+        workflow_list = Workflow.objects.filter(resume__id=resume_id).order_by('-time')
+        if workflow_list.exists():
+            result = {
+                'exists': True,
+                'workflows': []
+            }
+            for workflow in workflow_list.iterator():
+                result['workflows'].append({
+                    'id': workflow.pk,
+                    'status': workflow.title,
+                    'time': workflow.time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'from_user': workflow.from_user.nickname+'('+workflow.from_user.email+')',
+                    'comment': workflow.detail,
+                    'to_user': workflow.to_user.nickname+'('+workflow.to_user.email+')',
+                    'resume': workflow.resume.pk,
+                    'prevwf': workflow.prevwf and workflow.prevwf.pk or None,
+                })
+            return HttpResponse(json.dumps(result), content_type='application/json')
+    return HttpResponse(json.dumps({'exists': False}), content_type='application/json')
+
+
+@login_required
+def shownow(request, resume_id=None):
+    resume = get_object_or_404(Resume, pk=resume_id)
+    if request.user.role in ['H', 'A', 'E'] or request.user == resume.owner:
+        workflow = Workflow.objects.filter(resume__id=resume_id).order_by('-time').first()
+        if workflow:
+            result = {
+                'exists': True,
                 'id': workflow.pk,
                 'status': workflow.title,
                 'time': workflow.time.strftime('%Y-%m-%d %H:%M:%S'),
@@ -64,25 +87,6 @@ def show(request, resume_id=None):
                 'to_user': workflow.to_user.nickname+'('+workflow.to_user.email+')',
                 'resume': workflow.resume.pk,
                 'prevwf': workflow.prevwf and workflow.prevwf.pk or None,
-            })
-        return HttpResponse(json.dumps(result), content_type='application/json')
-    return HttpResponse(json.dumps({'exists': False}), content_type='application/json')
-
-
-@login_required
-def shownow(request, resume_id=None):
-    workflow = Workflow.objects.filter(resume__id=resume_id).order_by('-time').first()
-    if workflow:
-        result = {
-            'exists': True,
-            'id': workflow.pk,
-            'status': workflow.title,
-            'time': workflow.time.strftime('%Y-%m-%d %H:%M:%S'),
-            'from_user': workflow.from_user.nickname+'('+workflow.from_user.email+')',
-            'comment': workflow.detail,
-            'to_user': workflow.to_user.nickname+'('+workflow.to_user.email+')',
-            'resume': workflow.resume.pk,
-            'prevwf': workflow.prevwf and workflow.prevwf.pk or None,
-        }
-        return HttpResponse(json.dumps(result), content_type='application/json')
+            }
+            return HttpResponse(json.dumps(result), content_type='application/json')
     return HttpResponse(json.dumps({'exists': False}), content_type='application/json')
